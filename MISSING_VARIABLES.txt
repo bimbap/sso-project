@@ -1,17 +1,23 @@
-🚀 Additional Variables Needed
+🚀 MySQL Railway Configuration
 
-I can see you have the basic variables set, but you need these additional ones for the app to work properly:
+Since you have MySQL service, use these variables instead:
 
-In Railway Dashboard Variables tab, ADD these:
+ESSENTIAL VARIABLES FOR MYSQL:
 
-DB_CONNECTION=sqlite
-DB_DATABASE=/app/storage/database/database.sqlite
+DB_CONNECTION=mysql
+DB_HOST=${{RAILWAY_PRIVATE_DOMAIN}}
+DB_PORT=3306
+DB_DATABASE=railway
+DB_USERNAME=root
+DB_PASSWORD=${{MYSQL_ROOT_PASSWORD}}
+
+ALSO ADD THESE:
 SESSION_DRIVER=file
 SESSION_LIFETIME=120
 CACHE_DRIVER=file
 LOG_CHANNEL=single
 
-Optional but recommended:
-SESSION_ENCRYPT=false
-SESSION_PATH=/
-SESSION_DOMAIN=
+IMPORTANT:
+1. Go to your WEB SERVICE (sso-project), NOT MySQL service
+2. Add these variables to the WEB SERVICE Variables tab
+3. The MySQL variables will auto-reference your MySQL service
