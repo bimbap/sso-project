@@ -8,8 +8,11 @@ services:
     env:
       APP_ENV: production
       APP_DEBUG: false
-    volumes:
-      - /app/storage/logs
-      - /app/storage/framework/cache
-      - /app/storage/framework/sessions
-      - /app/storage/framework/views
+      SESSION_DRIVER: database
+      CACHE_DRIVER: database
+      QUEUE_CONNECTION: database
+    healthCheck:
+      path: /health
+      initialDelay: 30
+      timeout: 10
+      interval: 30

@@ -17,6 +17,16 @@ Route::get('/test', function () {
     return 'Laravel server is working!';
 });
 
+// Health check route for Railway
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok',
+        'timestamp' => now(),
+        'app' => config('app.name'),
+        'environment' => config('app.env')
+    ]);
+});
+
 // Test view rendering
 Route::get('/test-view', function () {
     return view('welcome');

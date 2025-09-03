@@ -29,6 +29,10 @@ RUN composer install --optimize-autoloader --no-dev --no-scripts
 # Copy application files
 COPY . .
 
+# Copy and make startup script executable
+COPY railway-start.sh /usr/local/bin/railway-start.sh
+RUN chmod +x /usr/local/bin/railway-start.sh
+
 # Run post-autoload scripts
 RUN composer dump-autoload --optimize
 
@@ -37,6 +41,7 @@ RUN mkdir -p storage/logs \
     storage/framework/cache/data \
     storage/framework/sessions \
     storage/framework/views \
+    storage/database \
     bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
@@ -50,5 +55,5 @@ COPY .docker/apache.conf /etc/apache2/sites-available/000-default.conf
 # Expose port
 EXPOSE 8080
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Start with Railway startup script
+CMD ["/usr/local/bin/railway-start.sh"]
