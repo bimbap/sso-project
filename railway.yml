@@ -1,0 +1,15 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    port: 8080
+    env:
+      APP_ENV: production
+      APP_DEBUG: false
+    volumes:
+      - /app/storage/logs
+      - /app/storage/framework/cache
+      - /app/storage/framework/sessions
+      - /app/storage/framework/views
