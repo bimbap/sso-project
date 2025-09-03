@@ -1,0 +1,34 @@
+[variables]
+PHP_VERSION = "8.2"
+
+[phases.setup]
+nixPkgs = [
+  "php82",
+  "php82Packages.composer", 
+  "php82Extensions.pdo",
+  "php82Extensions.pdo_mysql",
+  "php82Extensions.pdo_sqlite",
+  "php82Extensions.mbstring",
+  "php82Extensions.gd",
+  "php82Extensions.zip",
+  "sqlite",
+  "nodejs"
+]
+
+[phases.install] 
+cmds = [
+  "composer install --optimize-autoloader --no-dev --no-interaction"
+]
+
+[phases.build]
+cmds = [
+  "mkdir -p storage/logs storage/framework/cache/data storage/framework/sessions storage/framework/views storage/database bootstrap/cache",
+  "chmod -R 775 storage bootstrap/cache",
+  "php artisan config:cache || true",
+  "php artisan route:cache || true", 
+  "php artisan view:cache || true",
+  "touch storage/database/database.sqlite"
+]
+
+[start]
+cmd = "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"

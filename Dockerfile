@@ -1,4 +1,9 @@
-FROM php:8.2-apache
+FROM php:8.2.12-apache-bullseye
+
+# Set environment variables for better builds
+ENV DEBIAN_FRONTEND=noninteractive \
+    COMPOSER_ALLOW_SUPERUSER=1 \
+    COMPOSER_NO_INTERACTION=1
 
 # Install system dependencies in a single layer for better caching
 RUN apt-get update && apt-get install -y \
@@ -12,10 +17,11 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     libzip-dev \
+    ca-certificates \
     && docker-php-ext-install pdo_mysql pdo_sqlite mbstring exif pcntl bcmath gd zip \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && curl -sS https://getcomposer.org/installer | php -- --version=2.6.5 --install-dir=/usr/local/bin --filename=composer \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Set working directory
 WORKDIR /var/www/html
