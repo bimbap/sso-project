@@ -1,0 +1,54 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+SETUP.md
+PROJECT_COMPLETE.md
+
+# Environment files
+.env.example
+.env.production
+
+# Development files
+node_modules
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Laravel
+/storage/app/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/bootstrap/cache/*
+
+# Keep important storage directories
+!/storage/app/.gitkeep
+!/storage/framework/cache/.gitkeep
+!/storage/framework/sessions/.gitkeep
+!/storage/framework/views/.gitkeep
+!/storage/logs/.gitkeep
+!/bootstrap/cache/.gitkeep
+
+# Testing
+/coverage
+/.phpunit.result.cache
+
+# Development tools
+/vendor
+# Don't ignore composer.lock - needed for Docker build
+
+# Railway specific (we want these in the build)
+# vercel.json
+# railway.yml
