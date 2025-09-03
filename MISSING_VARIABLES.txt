@@ -1,0 +1,17 @@
+🚀 Additional Variables Needed
+
+I can see you have the basic variables set, but you need these additional ones for the app to work properly:
+
+In Railway Dashboard Variables tab, ADD these:
+
+DB_CONNECTION=sqlite
+DB_DATABASE=/app/storage/database/database.sqlite
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+CACHE_DRIVER=file
+LOG_CHANNEL=single
+
+Optional but recommended:
+SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=
